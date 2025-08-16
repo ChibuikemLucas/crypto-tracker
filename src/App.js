@@ -149,49 +149,51 @@ export default function App() {
       </header>
 
       <div className="card">
-        <table className="table">
-          <thead>
-            <tr>
-              <th style={{ width: 64 }}>#</th>
-              <th>Coin</th>
-              <th>Price</th>
-              <th>24h</th>
-              <th>Market Cap</th>
-            </tr>
-          </thead>
-          <tbody>
-            {coins.map((coin) => {
-              const up = coin.price_change_percentage_24h >= 0;
-              return (
-                <tr key={coin.id}>
-                  <td>{coin.market_cap_rank}</td>
-                  <td className="coin">
-                    <img src={coin.image} alt={coin.name} width="22" height="22" />
-                    <div className="coin-name">
-                      <strong>{coin.name}</strong>
-                      <span className="symbol">{coin.symbol.toUpperCase()}</span>
-                    </div>
-                  </td>
-                  <td>${coin.current_price.toLocaleString()}</td>
-                  <td className={up ? "up" : "down"}>
-                    {up ? "▲" : "▼"}{" "}
-                    {Math.abs(coin.price_change_percentage_24h).toFixed(2)}%
-                  </td>
-                  <td>${coin.market_cap.toLocaleString()}</td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
+        <div style={{ width: '100%', overflowX: 'auto' }}>
+          <table className="table" style={{ minWidth: 520 }}>
+            <thead>
+              <tr>
+                <th style={{ width: 48 }}>#</th>
+                <th>Coin</th>
+                <th>Price</th>
+                <th>24h</th>
+                <th className="hide-mobile">Market Cap</th>
+              </tr>
+            </thead>
+            <tbody>
+              {coins.map((coin) => {
+                const up = coin.price_change_percentage_24h >= 0;
+                return (
+                  <tr key={coin.id}>
+                    <td>{coin.market_cap_rank}</td>
+                    <td className="coin">
+                      <img src={coin.image} alt={coin.name} width="22" height="22" style={{ borderRadius: 6, background: '#222' }} />
+                      <div className="coin-name">
+                        <strong>{coin.name}</strong>
+                        <span className="symbol">{coin.symbol.toUpperCase()}</span>
+                      </div>
+                    </td>
+                    <td>${coin.current_price.toLocaleString()}</td>
+                    <td className={up ? "up" : "down"}>
+                      {up ? "▲" : "▼"} {Math.abs(coin.price_change_percentage_24h).toFixed(2)}%
+                    </td>
+                    <td className="hide-mobile">${coin.market_cap.toLocaleString()}</td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
       </div>
 
       <div className="card" style={{ marginTop: "1rem" }}>
-        <div className="chart-header">
-          <label>
-            Select Coin:{" "}
+        <div className="chart-header" style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+          <label style={{ fontWeight: 500, marginBottom: 6 }}>
+            Select Coin:
             <select
               value={selectedCoin}
               onChange={(e) => setSelectedCoin(e.target.value)}
+              style={{ marginLeft: 8, padding: '4px 8px', borderRadius: 6, border: '1px solid var(--border)', background: 'var(--panel)', color: 'var(--text)' }}
             >
               <option value="bitcoin">Bitcoin (BTC)</option>
               <option value="ethereum">Ethereum (ETH)</option>
@@ -206,11 +208,13 @@ export default function App() {
             </select>
           </label>
         </div>
-        {chartData ? (
-          <Line data={chartData} />
-        ) : (
-          <p className="muted">Loading chart…</p>
-        )}
+        <div style={{ width: '100%', overflowX: 'auto' }}>
+          {chartData ? (
+            <Line data={chartData} />
+          ) : (
+            <p className="muted">Loading chart…</p>
+          )}
+        </div>
       </div>
 
       <p className="muted tiny">

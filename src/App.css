@@ -75,6 +75,7 @@ body {
   width: 100%;
   border-collapse: collapse;
   overflow-x: auto;
+  min-width: 520px;
 }
 
 .table th,
@@ -82,6 +83,7 @@ body {
   padding: 14px 16px;
   border-bottom: 1px solid var(--border);
   text-align: left;
+  white-space: nowrap;
 }
 
 .table thead th {
@@ -185,4 +187,52 @@ body {
     padding: 12px;
     font-size: 15px;
   }
+
+  .table {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    min-width: 0;
+    border-radius: 10px;
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.08);
+  }
+
+  .table thead {
+    display: none;
+  }
+
+  .table tbody {
+    display: block;
+    width: 100%;
+  }
+
+  .table tr {
+    display: flex;
+    flex-direction: column;
+    background: var(--panel);
+    margin-bottom: 12px;
+    border-radius: 10px;
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.08);
+    border: 1px solid var(--border);
+    padding: 10px 0;
+  }
+
+  .table td {
+    display: flex;
+    align-items: center;
+    border: none;
+    padding: 8px 16px;
+    font-size: 15px;
+    border-bottom: none;
+    width: 100%;
+    white-space: normal;
+  }
+
+  .table td.hide-mobile {
+    display: none !important;
+  }
 }
+
+/* Hide columns on mobile */
+/* .hide-mobile class is used in markup, but does not need a CSS rule here. */
+/* End of file - removed extra closing brace */
