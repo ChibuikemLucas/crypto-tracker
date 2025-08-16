@@ -35,19 +35,42 @@ function CryptoList() {
     if (error) return <p className="error">{error}</p>;
 
     return (
-        <div className="crypto-list">
+        <div className="crypto-list" style={{
+            display: 'flex',
+            flexWrap: 'wrap',
+            gap: '20px',
+            justifyContent: 'center',
+        }}>
             {cryptos.map((coin) => {
                 const up = coin.price_change_percentage_24h >= 0;
                 return (
-                    <div key={coin.id} className="crypto-card">
-                        <h3>
-                            {coin.name} ({coin.symbol.toUpperCase()})
-                        </h3>
-                        <p>${coin.current_price.toLocaleString()}</p>
-                        <p className={up ? "up" : "down"}>
-                            {up ? "▲" : "▼"}{" "}
-                            {Math.abs(coin.price_change_percentage_24h).toFixed(2)}%
-                        </p>
+                    <div key={coin.id} className="crypto-card" style={{
+                        minWidth: 220,
+                        maxWidth: 260,
+                        flex: '1 1 220px',
+                        background: 'var(--panel)',
+                        border: '1px solid var(--border)',
+                        borderRadius: 12,
+                        padding: 18,
+                        boxShadow: '0 2px 12px rgba(0,0,0,0.10)',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'flex-start',
+                        gap: 8,
+                    }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                            <img src={coin.image} alt={coin.symbol} style={{ width: 32, height: 32, borderRadius: 8, background: '#222' }} />
+                            <div className="coin-name">
+                                <span style={{ fontWeight: 600 }}>{coin.name}</span>
+                                <span className="symbol">{coin.symbol.toUpperCase()}</span>
+                            </div>
+                        </div>
+                        <div style={{ marginTop: 8, fontSize: 18, fontWeight: 500 }}>
+                            ${coin.current_price.toLocaleString()}
+                        </div>
+                        <div className={up ? "up" : "down"} style={{ fontSize: 15 }}>
+                            {up ? "▲" : "▼"} {Math.abs(coin.price_change_percentage_24h).toFixed(2)}%
+                        </div>
                     </div>
                 );
             })}

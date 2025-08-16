@@ -24,6 +24,11 @@ body {
   max-width: 1000px;
   margin: 0 auto;
   padding: 24px;
+  min-height: 100vh;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
 }
 
 .header {
@@ -32,6 +37,7 @@ body {
   align-items: center;
   gap: 16px;
   margin-bottom: 16px;
+  flex-wrap: wrap;
 }
 
 .statusbar {
@@ -62,11 +68,13 @@ body {
   border: 1px solid var(--border);
   border-radius: 12px;
   overflow: hidden;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.12);
 }
 
 .table {
   width: 100%;
   border-collapse: collapse;
+  overflow-x: auto;
 }
 
 .table th,
@@ -117,6 +125,7 @@ body {
   border-radius: 50%;
   margin: 16px auto;
   animation: spin 0.8s linear infinite;
+  display: block;
 }
 
 .btn {
@@ -126,6 +135,7 @@ body {
   color: var(--accent);
   border-radius: 8px;
   cursor: pointer;
+  transition: background 0.2s, color 0.2s;
 }
 
 .btn:disabled {
@@ -159,5 +169,20 @@ body {
     flex-direction: column;
     align-items: flex-start;
     gap: 8px;
+  }
+
+  .page {
+    padding: 8px;
+    min-width: 0;
+  }
+
+  .crypto-list {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .crypto-card {
+    padding: 12px;
+    font-size: 15px;
   }
 }
