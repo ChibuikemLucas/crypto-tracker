@@ -21,6 +21,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
+  "proxy": "https://api.coingecko.com",
   "eslintConfig": {
     "extends": [
       "react-app",
